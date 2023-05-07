@@ -1,0 +1,56 @@
+# ENV for the application container image to enable jmx remote 
+# to allow Cryostat to auto discover the app
+
+env:
+  - name: JAVA_OPTS
+    value: >-
+      -Dcom.sun.management.jmxremote.authenticate=false
+      -Dcom.sun.management.jmxremote.ssl=false
+      -Dcom.sun.management.jmxremote.port=9010
+      -Dcom.sun.management.jmxremote.rmi.port=9010
+
+  - name: GC_CONTAINER_OPTIONS
+    value: -XX:+UseG1GC
+
+  - name: JAVA_OPTS_SECURE
+    value: >-
+      -Dcom.sun.management.jmxremote.authenticate=true
+      -Dcom.sun.management.jmxremote.password.file=/home/user/password.file
+      -Dcom.sun.management.jmxremote.ssl=true
+      -Dcom.sun.management.jmxremote.port=9010
+      -Dcom.sun.management.jmxremote.rmi.port=9010
+      -Djavax.net.ssl.keyStorePassword=password123 
+      -Djavax.net.ssl.keyStore=/home/user/server.ks
+
+      
+# Cryostat CR instance 
+
+apiVersion: operator.cryostat.io/v1beta1
+kind: Cryostat
+metadata:
+  name: cryostat-cr-config
+spec:
+  enableCertManager: false
+  minimal: false
+  resources:
+    coreResources:
+      limits:
+        cpu: '2'
+        memory: 2Gi
+      requests:
+        cpu: 1200m
+        memory: 768Mi
+    dataSourceResources:
+      limits:
+        cpu: 800m
+        memory: 512Mi
+      requests:
+        cpu: 500m
+        memory: 256Mi
+    grafanaResources:
+      limits:
+        cpu: '1'
+        memory: 512Mi
+      requests:
+        cpu: 800m
+        memory: 256Mi

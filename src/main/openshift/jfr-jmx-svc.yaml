@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jfr-sb-app-jfr-svc
+spec:
+  ports:
+  - name: jfr-jmx
+    port: 9010
+  selector:
+    app: jfr-sb-app

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: jfr-sb-app
+  name: jfr-sb-app
+spec:
+  ports:
+  - name: 8080-tcp
+    port: 8080
+  - name: 8443-tcp
+    port: 8443
+  selector:
+    app: jfr-sb-app
+    deployment: jfr-sb-app
