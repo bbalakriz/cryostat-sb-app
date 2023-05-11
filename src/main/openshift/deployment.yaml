@@ -4,7 +4,6 @@ metadata:
   labels:
     app: jfr-sb-app
   name: jfr-sb-app
-  namespace: cryostat
 spec:
   progressDeadlineSeconds: 600
   replicas: 1

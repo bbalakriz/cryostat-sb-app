@@ -30,7 +30,7 @@ kind: Cryostat
 metadata:
   name: cryostat-cr-config
 spec:
-  enableCertManager: false
+  enableCertManager: true
   minimal: false
   resources:
     coreResources:
